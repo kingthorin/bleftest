@@ -14,11 +14,12 @@ jobs:
           for d in **/; do
             echo $d
             echo "SECRET_NAME=$d_DIR" >> $GITHUB_ENV
-            echo "SECRET_NAME = ${{ env.SECRET_NAME }}"
+            # echo "SECRET_NAME = ${{ env.SECRET_NAME }}"
+            VALUE=${{ secrets[env.SECRET_NAME] }}
             if ! [[ -s "$d/vars.env" ]];
             then
               # Here we'd get values from the secrets store
-              cd ${{ secrets[env.SECRET_NAME] }}
+              cd $VALUE
               pwd
               ls
               cd ../
