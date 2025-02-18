@@ -10,6 +10,7 @@ jobs:
       - name: Do stuff
         run: |
           shopt -s extglob
+          cd bleftest
           BASE=$(pwd)
           echo $BASE
           touch scans/auth/all_vars.env
