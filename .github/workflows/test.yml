@@ -18,12 +18,14 @@ jobs:
             VALUE=${{ secrets[env.SECRET_NAME] }}
             if ! [[ -s "$d/vars.env" ]];
             then
+              echo One
               # Here we'd get values from the secrets store
               cd $VALUE
               pwd
               ls
               cd ../
            else
+             echo Two
              echo $d
              cat "$d"/vars.env | tee -a $BASE/scans/auth/all_vars.env > /dev/null
            fi
