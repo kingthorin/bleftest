@@ -8,7 +8,8 @@ jobs:
     steps:
       - name: Do stuff
         run: |
-          for d in ./stuff/**/; do
+          cd stuff
+          for d in **/; do
             echo $d
             echo "SECRET_NAME=$d_DIR" >> $GITHUB_ENV
             echo "SECRET_NAME = ${{ env.SECRET_NAME }}"
