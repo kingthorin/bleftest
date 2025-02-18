@@ -11,7 +11,8 @@ jobs:
         run: |
           shopt -s extglob
           BASE=$(pwd)
-          touch $BASE/scans/auth/all_vars.env
+          echo $BASE
+          touch ./scans/auth/all_vars.env
           cd stuff
           for d in **/; do
             echo $d
@@ -29,6 +30,6 @@ jobs:
            else
              echo Two
              echo $d
-             cat "$d"/vars.env | tee -a $BASE/scans/auth/all_vars.env > /dev/null
+             cat "$d"/vars.env | tee -a ./scans/auth/all_vars.env > /dev/null
            fi
           done
