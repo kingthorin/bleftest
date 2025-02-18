@@ -17,7 +17,7 @@ jobs:
             echo "SECRET_NAME=$d_DIR" >> $GITHUB_ENV
             # echo "SECRET_NAME = ${{ env.SECRET_NAME }}"
             echo "VALUE=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
-            if ! [[ -s "$d/vars.env" ]];
+            if [[ ! -f "$d/vars.env" ]];
             then
               echo One
               # Here we'd get values from the secrets store
