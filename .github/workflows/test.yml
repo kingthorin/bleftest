@@ -13,7 +13,8 @@ jobs:
             if ! [[ -s "$d/vars.env" ]];
             then
               # Here we'd get values from the secrets store
-              cd ./stuff/${{ secrets.$d_dir }}
+              LOC="$d"_dir
+              cd ./stuff/${{ secrets[LOC] }}
               pwd
               ls
            else
