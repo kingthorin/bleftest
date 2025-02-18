@@ -21,7 +21,7 @@ jobs:
             then
               echo One
               # Here we'd get values from the secrets store
-              cd $VALUE
+              cd $${{ env.VALUE }}
               pwd
               ls
               cd ../
