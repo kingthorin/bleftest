@@ -16,16 +16,15 @@ jobs:
           cd stuff
           for d in **/; do
             echo $d
-            echo "SECRET_NAME=$d_DIR" >> $GITHUB_ENV
-            # echo "SECRET_NAME = ${{ env.SECRET_NAME }}"
-            echo "VALUE=${{ secrets[env.SECRET_NAME] }}" >> $GITHUB_ENV
+            echo "NAME=$d_DIR" >> $GITHUB_ENV
+            echo "NAME = ${{ env.NAME }}"
+            echo "VALUE=${{ secrets[env.NAME] }}" >> $GITHUB_ENV
             if [[ ! -f "$d/vars.env" ]];
             then
               echo One
-              # Here we'd get values from the secrets store
               cd ${{ env.VALUE }}
               pwd
-              ls
+              ls al
               cd ../
            else
              echo Two
