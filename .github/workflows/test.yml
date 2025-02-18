@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Do stuff
         run: |
-          shopt -s extglo
+          shopt -s extglob
           BASE=$(pwd)
           cd stuff
           for d in **/; do
