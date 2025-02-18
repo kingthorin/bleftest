@@ -24,6 +24,7 @@ jobs:
               ls
               cd ../
            else
+             echo $d
              cat "$d"/vars.env | tee -a $BASE/scans/auth/all_vars.env > /dev/null
            fi
           done
