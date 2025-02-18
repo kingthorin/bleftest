@@ -18,7 +18,7 @@ jobs:
             then
               # Here we'd get values from the secrets store
               LOC="$d"_DIR
-              cd ./stuff/${{ secrets[env.SECRET_NAME] }}
+              cd ${{ secrets[env.SECRET_NAME] }}
               pwd
               ls
            else
