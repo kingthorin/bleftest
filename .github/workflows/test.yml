@@ -3,18 +3,20 @@ on:
 
 name: Test
 jobs:
-  LinkCheck:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Do stuff
         run: |
           for d in ./stuff/**/; do
             echo $d
+            echo "SECRET_NAME=$d_DIR" >> $GITHUB_ENV
+            echo "SECRET_NAME = ${{ env.SECRET_NAME }}"
             if ! [[ -s "$d/vars.env" ]];
             then
               # Here we'd get values from the secrets store
-              LOC="$d"_dir
-              cd ./stuff/${{ secrets[$LOC] }}
+              LOC="$d"_DIR
+              cd ./stuff/${{ secrets[env.SECRET_NAME] }}
               pwd
               ls
            else
