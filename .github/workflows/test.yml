@@ -24,7 +24,7 @@ jobs:
               echo One
               cd ${{ env.VALUE }}
               pwd
-              ls al
+              ls -al
               cd ../
            else
              echo Two
