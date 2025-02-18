@@ -9,6 +9,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Do stuff
         run: |
+          shopt -s extglo
           BASE=$(pwd)
           cd stuff
           for d in **/; do
@@ -16,7 +17,7 @@ jobs:
             echo "SECRET_NAME=$d_DIR" >> $GITHUB_ENV
             # echo "SECRET_NAME = ${{ env.SECRET_NAME }}"
             VALUE=${{ secrets[env.SECRET_NAME] }}
-            if ! [[ -s "$d/vars.env" ]];
+            if ! [[ -s $d/vars.env ]];
             then
               echo One
               # Here we'd get values from the secrets store
