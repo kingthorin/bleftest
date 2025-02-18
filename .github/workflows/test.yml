@@ -12,7 +12,7 @@ jobs:
           shopt -s extglob
           BASE=$(pwd)
           echo $BASE
-          touch ./scans/auth/all_vars.env
+          touch scans/auth/all_vars.env
           cd stuff
           for d in **/; do
             echo $d
