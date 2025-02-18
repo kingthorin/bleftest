@@ -18,11 +18,11 @@ jobs:
             echo $d
             echo "NAME=$d_DIR" >> $GITHUB_ENV
             echo "NAME = ${{ env.NAME }}"
-            echo "VALUE=${{ secrets[env.NAME] }}" >> $GITHUB_ENV
+            #echo "VALUE=${{ secrets[env.NAME] }}" >> $GITHUB_ENV
             if [[ ! -f "$d/vars.env" ]];
             then
               echo One
-              cd ${{ env.VALUE }}
+              cd ${{ secrets[env.NAME] }}
               pwd
               ls -al
               cd ../
