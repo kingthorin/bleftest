@@ -22,7 +22,8 @@ jobs:
             if [[ ! -f "$d/vars.env" ]];
             then
               echo One
-              cd ${{ secrets[env.NAME] }}
+              cd $d
+              echo ${{ secrets[env.NAME] }} | tee -a $BASE/stuff/all_vars.env > /dev/null
               pwd
               ls -al
               cd ../
@@ -32,3 +33,4 @@ jobs:
              cat "$d"/vars.env | tee -a $BASE/stuff/all_vars.env > /dev/null
            fi
           done
+          wc -l $BASE/stuff/all_vars.env
