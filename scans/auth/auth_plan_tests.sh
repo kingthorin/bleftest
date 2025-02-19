@@ -60,7 +60,5 @@ echo -e "$summary"
 echo "Exit Code: $RES"
 
 cat "$OUTPUT"
-echo
-echo
 
 exit $RES
