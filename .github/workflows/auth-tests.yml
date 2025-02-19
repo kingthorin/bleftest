@@ -13,6 +13,8 @@ jobs:
         if: ${{ ! cancelled() }}
         run: |
           cd scans/auth/
+          pwd
+          ls -alh
           ./collect_vars.sh
           cd ../../
       - name: Authentication plan tests
