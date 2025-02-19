@@ -24,5 +24,6 @@ jobs:
         run: |
           docker pull ghcr.io/zaproxy/zaproxy:nightly
           ls -lah ./scans/auth/
-          ls -lah /zap/wrk/scans/auth/
+          pwd
+          ls -lah
           docker run --rm -v $(pwd):/zap/wrk/:rw --env-file ./scans/auth/all_vars.env -t zaproxy/zap-nightly /zap/wrk/scans/auth/auth_plan_tests.sh 
