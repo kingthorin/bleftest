@@ -18,8 +18,8 @@ env:
     users:
     - name: testuser
       credentials:
-        password: test
-        username: test
+        password: ${testphp_pass}
+        username: ${testphp_pass}
 jobs:
 - type: requestor
   parameters:
