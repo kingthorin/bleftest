@@ -14,10 +14,8 @@ jobs:
         env:
           ALL_VARS: ${{ secrets.ALL_VARS }}
         run: |
-          cd scans/auth/
-          chmod +x *.sh
-          ./collect_vars.sh
-          cd ../../
+          chmod +x ./scans/auth/*.sh
+          ./scans/auth/collect_vars.sh
       - name: Authentication plan tests
         id: "test-auth-plans"
         if: ${{ ! cancelled() }}
