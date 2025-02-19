@@ -13,7 +13,7 @@ echo
 
 cd /zap/wrk/scans/auth/plans_and_scripts/
 
-summary="\nSummary:\n"
+summary="\n\nSummary:\n========\n"
 INDENT="  "
 
 for TARGET in *
@@ -59,6 +59,6 @@ done
 echo -e "$summary"
 echo "Exit Code: $RES"
 
-cat "$OUTPUT"
+cat "$OUTPUT\n\n"
 
 exit $RES
