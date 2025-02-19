@@ -7,6 +7,6 @@ for d in ../../scans/auth/plans_and_scripts/**/; do
     cat "$d"/vars.env | tee -a ../../scans/auth/all_vars.env > /dev/null
   fi
 done
-echo ${{ secrets.ALL_VARS }} | tee -a ../../scans/auth/all_vars.env > /dev/null
+echo $ALL_VARS | tee -a ../../scans/auth/all_vars.env > /dev/null
 
 wc -l ../../scans/auth/all_vars.env
