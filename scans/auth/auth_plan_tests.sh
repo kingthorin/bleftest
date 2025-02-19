@@ -59,6 +59,8 @@ done
 echo -e "$summary"
 echo "Exit Code: $RES"
 
-cat "$OUTPUT\n\n"
+cat "$OUTPUT"
+echo
+echo
 
 exit $RES
