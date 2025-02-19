@@ -12,7 +12,7 @@ jobs:
         id: "build-vars"
         if: ${{ ! cancelled() }}
         env:
-          ALL_VARS: ${{ secrets.ALL_VARS }}
+          AUTH_SCANS_CREDS: ${{ secrets.AUTH_SCANS_CREDS }}
         run: |
           chmod +x ./scans/auth/*.sh
           ./scans/auth/collect_vars.sh
