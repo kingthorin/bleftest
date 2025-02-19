@@ -10,6 +10,6 @@ for d in ../../scans/auth/plans_and_scripts/**/; do
 done
 wc -l ../../scans/auth/all_vars.env
 
-echo $ALL_VARS | tee -a ../../scans/auth/all_vars.env > /dev/null
+echo "$ALL_VARS" | tee -a ../../scans/auth/all_vars.env > /dev/null
 
 wc -l ../../scans/auth/all_vars.env
