@@ -20,6 +20,7 @@ for TARGET in *
 do
     if [ -d "$TARGET" ]
     then
+        summary="${summary}$TARGET\n"
         echo
         cd "$TARGET"
         echo "$TARGET:"|tee -a "$OUTPUT" > /dev/null
