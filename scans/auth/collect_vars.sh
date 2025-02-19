@@ -12,4 +12,4 @@ wc -l scans/auth/all_vars.env
 
 echo "$ALL_VARS" | tee -a scans/auth/all_vars.env > /dev/null
 
-wc -l .cans/auth/all_vars.env
+wc -l scans/auth/all_vars.env
