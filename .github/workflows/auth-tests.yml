@@ -11,11 +11,11 @@ jobs:
       - name: Build vars collection
         id: "build-vars"
         if: ${{ ! cancelled() }}
+        env:
+          ALL_VARS: ${{ secrets.ALL_VARS }}
         run: |
           cd scans/auth/
-          pwd
           chmod +x *.sh
-          ls -alh
           ./collect_vars.sh
           cd ../../
       - name: Authentication plan tests
