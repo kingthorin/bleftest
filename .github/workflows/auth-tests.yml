@@ -22,4 +22,4 @@ jobs:
         run: |
           chmod a+w $(pwd)
           docker pull ghcr.io/zaproxy/zaproxy:nightly
-          docker run --rm -v $(pwd):/zap/wrk/:rw --env-file ./scans/auth/all_vars.env -t zaproxy/zap-nightly /zap/wrk/scans/auth/auth_plan_tests.sh 
+          docker run --rm -v $(pwd):/zap/wrk/:rw --env-file scans/auth/all_vars.env -t zaproxy/zap-nightly /zap/wrk/scans/auth/auth_plan_tests.sh 
