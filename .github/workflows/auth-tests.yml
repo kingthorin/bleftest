@@ -13,7 +13,7 @@ jobs:
         if: ${{ ! cancelled() }}
         run: |
           cd scans/auth/
-          collect_vars.sh
+          ./collect_vars.sh
           cd ../../
       - name: Authentication plan tests
         id: "test-auth-plans"
