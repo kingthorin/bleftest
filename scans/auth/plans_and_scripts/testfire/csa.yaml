@@ -17,8 +17,8 @@ env:
     users:
     - name: testuser
       credentials:
-        Username: jsmith
-        Password: demo1234
+        Username: ${testfire_user}
+        Password: ${testfire_pass}
 jobs:
 - type: requestor
   parameters:
