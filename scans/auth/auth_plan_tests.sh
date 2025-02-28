@@ -7,12 +7,17 @@ runplan()
     FILE=$2
     TYPE=$3
     echo "Target: $TARGET Plan: $FILE"
-    echo -ne "$INDENT$TYPE"|tee -a "$OUTPUT" > /dev/null
+    echo -ne "$INDENT$INDENT$TYPE:\n"|tee -a "$OUTPUT" > /dev/null
+    echo -ne "$INDENT$INDENT$INDENT"auth:|tee -a "$OUTPUT" > /dev/null
 
     /zap/zap.sh -cmd -autorun "$FILE"
     RET=$?
-    AUTHREPORT=../../auth-report.json
-
+    if [[ $TYPE == "stdbba" ]]
+    then
+        AUTHREPORT=../../auth-report.json
+    else
+        AUTHREPORT=auth-report.json
+    fi
     if [ -f $AUTHREPORT ]
     then
         echo "Using data from the authentication report"
@@ -23,6 +28,7 @@ runplan()
             echo "PASS"
             echo " true"|tee -a "$OUTPUT" > /dev/null
             summary="${summary}  Plan: $TYPE\tPASS\n"
+            getreportdetails $AUTHREPORT
         else
             if [ "$AUTH" != "false" ]
             then
@@ -31,6 +37,7 @@ runplan()
             echo "ERROR"
             echo " false"|tee -a "$OUTPUT" > /dev/null
             summary="${summary}  Plan: $TYPE\tERROR\n"
+            getreportdetails $AUTHREPORT
             RES=1
         fi 
         rm $AUTHREPORT
@@ -48,6 +55,19 @@ runplan()
             summary="${summary}  Plan: $TYPE\tPASS\n"
         fi
     fi
+}
+
+getreportdetails()
+{
+    AUTHREPORT=$1
+    USER_SUCCESS=`jq -r '.summaryItems[] | select(.key == "auth.summary.username") | .passed' $AUTHREPORT`
+    echo "$INDENT$INDENT$INDENT"username: $USER_SUCCESS|tee -a "$OUTPUT" > /dev/null
+    PASS_SUCCESS=`jq -r '.summaryItems[] | select(.key == "auth.summary.password") | .passed' $AUTHREPORT`
+    echo "$INDENT$INDENT$INDENT"password: $PASS_SUCCESS|tee -a "$OUTPUT" > /dev/null
+    SESS_SUCCESS=`jq -r '.summaryItems[] | select(.key == "auth.summary.session") | .passed' $AUTHREPORT`
+    echo "$INDENT$INDENT$INDENT"session: $SESS_SUCCESS|tee -a "$OUTPUT" > /dev/null
+    VERIF_SUCCESS=`jq -r '.summaryItems[] | select(.key == "auth.summary.verif") | .passed' $AUTHREPORT`
+    echo "$INDENT$INDENT$INDENT"verification: $VERIF_SUCCESS|tee -a "$OUTPUT" > /dev/null
 }
 
 RES=0
@@ -84,26 +104,32 @@ do
 
             export username=$(eval echo \$\{TARGET\}_user)
             export zapusername=${!username}
-            
-            runplan $TARGET /zap/wrk/scans/auth/bba-auth-test.yaml "stdbba:"
+
+            echo -ne "$INDENT"|tee -a "$OUTPUT" > /dev/null
+            echo -ne "site: \"$zapsite\"\n"|tee -a "$OUTPUT" > /dev/null
+
+            if [ -f notes.txt ]
+            then
+                echo -ne "$INDENT"|tee -a "$OUTPUT" > /dev/null
+                echo -ne "note: "|tee -a "$OUTPUT" > /dev/null
+                echo "\"$(cat notes.txt)\""|tee -a "$OUTPUT" > /dev/null
+            fi
+
+            echo -ne "$INDENT"|tee -a "$OUTPUT" > /dev/null
+            echo -ne "plans:\n"|tee -a "$OUTPUT" > /dev/null
+            runplan $TARGET /zap/wrk/scans/auth/bba-auth-test.yaml "stdbba"
         else
             echo "No $TARGET/config file"
         fi
-        
+
         shopt -s nullglob  # May be no yaml files
         for file in *.yaml
         do
-            runplan $TARGET /zap/wrk/scans/auth/plans_and_scripts/$TARGET/$file $(echo "$file"|cut -d"." -f1)":"
+            runplan $TARGET /zap/wrk/scans/auth/plans_and_scripts/$TARGET/$file $(echo "$file"|cut -d"." -f1)
             sleep 2
         done
         shopt -u nullglob
 
-        if [ -f notes.txt ]
-        then
-            echo -ne "$INDENT"|tee -a "$OUTPUT" > /dev/null
-            echo -ne "note: "|tee -a "$OUTPUT" > /dev/null
-            echo \""$(cat notes.txt)"\"|tee -a "$OUTPUT" > /dev/null
-        fi
         cd ..
     fi
 done
