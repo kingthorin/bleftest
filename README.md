@@ -1,4 +1,3 @@
 # bleftest
 
-Fred Penner
-jane
+Fred 
