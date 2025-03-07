@@ -1,0 +1,167 @@
+{
+	"@programName": "ZAP",
+	"@version": "D-2025-02-21",
+	"@generated": "Fri, 21 Feb 2025 22:14:04",
+	"site":  "http:\/\/zero.webappsecurity.com"
+	
+	,"summaryItems": [
+		{
+			"description": "Authentication failed",
+			"passed": "false",
+			"key": "auth.summary.auth"
+		},
+		{
+			"description": "Username field identified",
+			"passed": "true",
+			"key": "auth.summary.username"
+		},
+		{
+			"description": "Password field identified",
+			"passed": "true",
+			"key": "auth.summary.password"
+		},
+		{
+			"description": "Session Handling not identified",
+			"passed": "false",
+			"key": "auth.summary.session"
+		},
+		{
+			"description": "Verification URL not identified",
+			"passed": "false",
+			"key": "auth.summary.verif"
+		}
+	]
+	
+	
+	,"afEnv": "env:\n  contexts:\n  - name: Default Context\n    urls:\n    - http:\/\/zero.webappsecurity.com\n    includePaths:\n    - http:\/\/zero.webappsecurity.com.*\n    authentication:\n      method: browser\n      parameters:\n        loginPageUrl: http:\/\/zero.webappsecurity.com\/login.html\n        loginPageWait: 5\n        browserId: firefox-headless\n        steps: []\n      verification:\n        method: autodetect\n        pollFrequency: 0\n        pollUnits: seconds\n    sessionManagement:\n      method: autodetect\n    technology: {}\n    structure: {}\n    users:\n    - name: test-user\n      credentials:\n        password: password\n        username: username\n  parameters: {}\n"
+	
+	
+	,"statistics": [
+		{
+			"key": "stats.auth.browser.failed",
+			"scope": "site",
+			"value": "1"
+		},
+		{
+			"key": "stats.auth.browser.foundfields",
+			"scope": "site",
+			"value": "1"
+		},
+		{
+			"key": "stats.auth.browser.nopasswordfield",
+			"scope": "site",
+			"value": "1"
+		},
+		{
+			"key": "stats.auth.browser.passed",
+			"scope": "site",
+			"value": "1"
+		},
+		{
+			"key": "stats.auth.detect.auth.form",
+			"scope": "global",
+			"value": "2"
+		},
+		{
+			"key": "stats.auth.failure",
+			"scope": "site",
+			"value": "2"
+		},
+		{
+			"key": "stats.auto.job.passiveScan-config.run",
+			"scope": "global",
+			"value": "1"
+		},
+		{
+			"key": "stats.auto.job.passiveScan-wait.run",
+			"scope": "global",
+			"value": "1"
+		},
+		{
+			"key": "stats.auto.job.requestor.run",
+			"scope": "global",
+			"value": "1"
+		},
+		{
+			"key": "stats.auto.jobs.run",
+			"scope": "global",
+			"value": "3"
+		},
+		{
+			"key": "stats.auto.plans.run",
+			"scope": "global",
+			"value": "1"
+		},
+		{
+			"key": "stats.network.send.failure",
+			"scope": "global",
+			"value": "54"
+		},
+		{
+			"key": "stats.network.send.success",
+			"scope": "global",
+			"value": "69"
+		},
+		{
+			"key": "stats.pscan.10111.alerts",
+			"scope": "global",
+			"value": "2"
+		},
+		{
+			"key": "stats.pscan.10111.time",
+			"scope": "global",
+			"value": "28"
+		},
+		{
+			"key": "stats.pscan.10112.time",
+			"scope": "global",
+			"value": "0"
+		},
+		{
+			"key": "stats.pscan.10113.time",
+			"scope": "global",
+			"value": "0"
+		},
+		{
+			"key": "stats.pscan.Anti CSRF Token Detection",
+			"scope": "global",
+			"value": "69"
+		},
+		{
+			"key": "stats.pscan.Authentication Request Identified",
+			"scope": "global",
+			"value": "28"
+		},
+		{
+			"key": "stats.pscan.Parameter Scanner",
+			"scope": "global",
+			"value": "25"
+		},
+		{
+			"key": "stats.pscan.Session Management Response Identified",
+			"scope": "global",
+			"value": "0"
+		},
+		{
+			"key": "stats.pscan.Verification Request Identified",
+			"scope": "global",
+			"value": "0"
+		},
+		{
+			"key": "stats.pscan.recordsToScan",
+			"scope": "global",
+			"value": "38"
+		},
+		{
+			"key": "stats.selenium.launch.5.firefox-headless",
+			"scope": "global",
+			"value": "2"
+		},
+		{
+			"key": "stats.selenium.launch.firefox-headless",
+			"scope": "global",
+			"value": "2"
+		}
+	]
+	
+}

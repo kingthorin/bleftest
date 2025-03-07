@@ -1,0 +1,30 @@
+aspnet:
+  stdbba: true
+ginnjuice:
+  stdbba: true
+testasp:
+  stdbba: true
+testfire:
+  stdbba: false
+    username:
+    passwrod:
+    session: false
+    verification: false
+  bbaplus: true
+    username: true
+    passwrod: true
+    session: true
+    verification: true
+  csa: false
+    username:
+    passwrod:
+    session: false
+    verification: false
+  note: "CSA is failing due to use of autodetect."
+testhtml5:
+  stdbba: true
+testphp:
+  stdbba: true
+  note: ""
+webappsec:
+  stdbba: true
