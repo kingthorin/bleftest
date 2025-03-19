@@ -38,8 +38,8 @@ env:
     users:
     - name: testuser
       credentials:
-        username: ${zapusername}
-        password: ${zappassword}
+        username: complex@authenticationtest.com
+        password: pa$$w0rd
 jobs:
 - type: passiveScan-config
   parameters:
