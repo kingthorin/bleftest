@@ -35,6 +35,7 @@ env:
       method: headers
     technology: {}
     structure: {}
+    users:
     - name: testuser
       credentials:
         username: ${zapusername}
