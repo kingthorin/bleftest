@@ -1,27 +1,32 @@
 env:
   contexts:
-  - name: Default Context
+  - name: Authentication Test
     urls:
-    - ${zapsite}
+    - https://authenticationtest.com
     includePaths:
-    - ${zapsite}.*
+    - https://authenticationtest.com.*
     authentication:
       method: browser
       parameters:
-        browserId: firefox-headless
-        loginPageUrl: ${zaploginurl}
-        loginPageWait: 5
+        loginPageUrl: https://authenticationtest.com/simpleFormAuth/
+        loginPageWait: 2
+        browserId: firefox
       verification:
-        method: autodetect
+        method: response
+        loggedInRegex: mode=logout
+        pollFrequency: 60
+        pollUnits: requests
+        pollUrl: ""
+        pollPostData: ""
     sessionManagement:
-      method: autodetect
+      method: cookie
     technology: {}
+    structure: {}
     users:
-    - name: test-user
+    - name: testuser
       credentials:
-        password: ${zappassword}
         username: ${zapusername}
-  parameters: {}
+        password: ${zappassword}
 jobs:
 - type: passiveScan-config
   parameters:
@@ -38,7 +43,7 @@ jobs:
     threshold: medium
 - type: requestor
   parameters:
-    user: test-user
+    user: testuser
   requests:
   - url: ${zapsite}
 - type: passiveScan-wait
@@ -51,7 +56,6 @@ jobs:
     reportDir: .
     reportFile: auth-report.json
     reportTitle: ZAP by Checkmarx Scanning Report
-    displayReport: false
   sections:
   - summary
   - afenv
