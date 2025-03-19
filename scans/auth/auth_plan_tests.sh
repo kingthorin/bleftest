@@ -21,6 +21,7 @@ runplan()
     if [ -f $AUTHREPORT ]
     then
         echo "Using data from the authentication report"
+        cat $AUTHREPORT
         AUTH=`jq -r '.summaryItems[] | select(.key == "auth.summary.auth") | .passed' $AUTHREPORT`
         
         if [ "$AUTH" == "true" ]
