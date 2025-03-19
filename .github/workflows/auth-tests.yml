@@ -1,6 +1,9 @@
 name: Run Auth Tests
 on:
   workflow_dispatch:
+  schedule:
+    # daily at 03:10
+    - cron:  '10 3 * * *'
 
 jobs:
   publish:
@@ -9,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Pull nightly image
         run: docker pull ghcr.io/zaproxy/zaproxy:nightly
       - name: Authentication plan tests
@@ -27,3 +32,31 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
          path: output/output.yml
+      - name: Build Feature Branch and Raise PR
+        if: ${{ ! cancelled() }}
+        run: |
+          # Setup git details
+          export GITHUB_USER=zapbot
+          git config --global user.email "12745184+zapbot@users.noreply.github.com"
+          git config --global user.name $GITHUB_USER
+          # Clone destination repo
+          git clone -o upstream https://github.com/zaproxy/zaproxy-website.git
+          cd zaproxy-website
+          git remote add origin https://github.com/$GITHUB_USER/zaproxy-website.git
+          # Setup env vars for later
+          BRANCH="auth-tests-update"
+          export GITHUB_TOKEN=${{ secrets.ZAPBOT_TOKEN }}
+          # Build the feature branch
+          git checkout -b $BRANCH
+          cp -f ../output/output.yml site/data/scans/auth/output.yml
+          ## Update the index to be sure git is aware of changes
+          git update-index -q --refresh
+          ## If there are changes: comment, commit, PR
+          if ! git diff-index --quiet HEAD --; then
+            gh repo set-default zaproxy/zaproxy-website
+            git remote set-url origin https://$GITHUB_USER:$GITHUB_TOKEN@github.com/$GITHUB_USER/zaproxy-website.git
+            git add .
+            git commit -sm 'Authentication Tests Update'
+            git push -u origin $BRANCH -f
+            gh pr view --json mergedAt|jq -e '.mergedAt' && gh pr create -f
+          fi
