@@ -10,7 +10,7 @@ env:
       parameters:
         loginPageUrl: https://authenticationtest.com/simpleFormAuth/
         loginPageWait: 2
-        browserId: firefox
+        browserId: firefox-headless
       verification:
         method: response
         loggedInRegex: mode=logout
