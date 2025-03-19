@@ -32,7 +32,7 @@ env:
         pollUrl: ""
         pollPostData: ""
     sessionManagement:
-      method: headers
+      method: cookie
     technology: {}
     structure: {}
     users:
