@@ -1,0 +1,38 @@
+env:
+  contexts:
+  - name: Authentication Test
+    urls:
+    - http://testfire.net
+    includePaths:
+    - https?://testfire.net.*
+    authentication:
+      method: browser
+      parameters:
+        loginPageUrl: http://testfire.net/login.jsp
+        loginPageWait: 2
+        browserId: firefox-headless
+        steps:
+        - description: Fill Username
+          type: USERNAME
+          cssSelector: "#uid"
+          value: jsmith
+          timeout: 1000
+      verification:
+        method: autodetect
+    sessionManagement:
+      method: autodetect
+    users:
+    - name: testuser
+      credentials:
+        password: ${testfire_pass}
+        username: ${testfire_user}
+jobs:
+- type: requestor
+  parameters:
+    user: testuser
+  requests:
+  - name: Get Account Details
+    url: 'http://testfire.net/bank/showAccount?listAccounts=800002'
+    method: GET
+    responseCode: 200
+

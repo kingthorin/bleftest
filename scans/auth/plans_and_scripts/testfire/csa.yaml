@@ -1,0 +1,31 @@
+env:
+  contexts:
+  - name: Authentication Test
+    urls:
+    - http://testfire.net
+    includePaths:
+    - https?://testfire.net.*
+    authentication:
+      method: script
+      parameters:
+        script: ./testfire.zst
+        scriptEngine: Mozilla Zest
+      verification:
+        method: autodetect
+    sessionManagement:
+      method: autodetect
+    users:
+    - name: testuser
+      credentials:
+        Username: ${testfire_user}
+        Password: ${testfire_pass}
+jobs:
+- type: requestor
+  parameters:
+    user: testuser
+  requests:
+  - name: Get Account Details
+    url: 'http://testfire.net/bank/showAccount?listAccounts=800002'
+    method: GET
+    responseCode: 200
+
