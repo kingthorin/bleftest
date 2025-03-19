@@ -2,13 +2,13 @@ env:
   contexts:
   - name: Authentication Test
     urls:
-    - http://testfire.net
+    - ${zapsite}
     includePaths:
-    - https?://testfire.net.*
+    - ${zapsite}.*
     authentication:
       method: browser
       parameters:
-        loginPageUrl: http://testfire.net/login.jsp
+        loginPageUrl: ${zaploginurl}
         loginPageWait: 2
         browserId: firefox-headless
         steps:
@@ -24,15 +24,38 @@ env:
     users:
     - name: testuser
       credentials:
-        password: ${testfire_pass}
-        username: ${testfire_user}
+        username: ${zapusername}
+        password: ${zappassword}
 jobs:
+- type: passiveScan-config
+  parameters:
+    disableAllRules: true
+  rules:
+  - name: Authentication Request Identified
+    id: 10111
+    threshold: medium
+  - name: Session Management Response Identified
+    id: 10112
+    threshold: medium
+  - name: Verification Request Identified
+    id: 10113
+    threshold: medium
 - type: requestor
   parameters:
     user: testuser
   requests:
-  - name: Get Account Details
-    url: 'http://testfire.net/bank/showAccount?listAccounts=800002'
-    method: GET
-    responseCode: 200
-
+  - url: ${zapsite}
+- type: passiveScan-wait
+  parameters: {}
+- name: auth-test-report
+  type: report
+  parameters:
+    template: auth-report-json
+    theme: null
+    reportDir: .
+    reportFile: auth-report.json
+    reportTitle: ZAP by Checkmarx Scanning Report
+  sections:
+  - summary
+  - afenv
+  - statistics
