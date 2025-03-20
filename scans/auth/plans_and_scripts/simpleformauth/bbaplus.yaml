@@ -14,7 +14,7 @@ env:
         diagnostics: true
       verification:
         method: response
-        loggedInRegex: loginSucces|mode=logout
+        loggedInRegex: loginSuccess|mode=logout
         pollFrequency: 60
         pollUnits: requests
         pollUrl: ""
