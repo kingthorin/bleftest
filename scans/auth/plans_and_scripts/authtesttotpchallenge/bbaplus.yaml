@@ -2,13 +2,13 @@ env:
   contexts:
   - name: Authentication Test
     urls:
-    - https://authenticationtest.com
+    - ${zapsite}
     includePaths:
-    - https://authenticationtest.com.*
+    - ${zapsite}.*
     authentication:
       method: browser
       parameters:
-        loginPageUrl: https://authenticationtest.com/totpChallenge/
+        loginPageUrl: ${zaploginurl}
         loginPageWait: 2
         browserId: firefox-headless
         steps:
