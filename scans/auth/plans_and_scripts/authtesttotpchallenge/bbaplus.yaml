@@ -31,14 +31,13 @@ env:
     users:
     - name: testuser
       credentials:
-        credentials:
-          totp:
-          secret: I65VU7K5ZQL7WB4E
-          period: 30
-          digits: 6
-          algorithm: SHA1
-        username: ${zapusername}
-        password: ${zappassword}
+        totp:
+        secret: I65VU7K5ZQL7WB4E
+        period: 30
+        digits: 6
+        algorithm: SHA1
+      username: ${zapusername}
+      password: ${zappassword}
 jobs:
 - type: passiveScan-config
   parameters:
