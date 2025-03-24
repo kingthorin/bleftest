@@ -8,10 +8,15 @@ env:
     authentication:
       method: browser
       parameters:
-        loginPageUrl: https://authenticationtest.com/iframeChallenge/
+        loginPageUrl: https://authenticationtest.com/totpChallenge/
         loginPageWait: 2
         browserId: firefox-headless
         diagnostics: true
+        steps:
+        - description: TOTP
+          type: TOTP_FIELD
+          cssSelector: "#totpmfa"
+          timeout: 1000
       verification:
         method: response
         loggedInRegex: "loginSuccess|are logged in"
@@ -26,6 +31,12 @@ env:
     users:
     - name: testuser
       credentials:
+        credentials:
+          totp:
+          secret: I65VU7K5ZQL7WB4E
+          period: 30
+          digits: 6
+          algorithm: SHA1
         username: ${zapusername}
         password: ${zappassword}
 jobs:
