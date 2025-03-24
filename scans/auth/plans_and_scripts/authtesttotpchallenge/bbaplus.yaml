@@ -19,7 +19,7 @@ env:
           timeout: 1000
       verification:
         method: response
-        loggedInRegex: loginSuccess|are logged in
+        loggedInRegex: loginSuccess|mode=logout
         pollFrequency: 60
         pollUnits: requests
         pollUrl: ""
