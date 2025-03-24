@@ -2,9 +2,9 @@ env:
   contexts:
   - name: Authentication Test
     urls:
-    - ${zapsite}
+    - https://authenticationtest.com/
     includePaths:
-    - ${zapsite}.*
+    - https://authenticationtest.com.*
     authentication:
       method: browser
       parameters:
