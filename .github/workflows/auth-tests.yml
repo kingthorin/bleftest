@@ -28,10 +28,16 @@ jobs:
           echo "\`\`\`yaml" >> $GITHUB_STEP_SUMMARY
           cat output/output.yml >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`yaml" >> $GITHUB_STEP_SUMMARY
+          cat scans/auth/plans_and_scripts/authtestmulti/auth-report.json >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
       - name: Attach result
         uses: actions/upload-artifact@v4
         with:
-         path: output/output.yml
+         path: |
+           output/output.yml
+           scans/auth/plans_and_scripts/authtestmulti/auth-report.json
       - name: Build Feature Branch and Raise PR
         # if: ${{ ! cancelled() }}
         if: ${{ false }}
