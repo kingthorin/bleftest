@@ -29,8 +29,8 @@ jobs:
           cat output/output.yml >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "---" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`yaml" >> $GITHUB_STEP_SUMMARY
-          cat scans/auth/plans_and_scripts/authtestmulti/auth-report.json >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+          cat scans/auth/plans_and_scripts/authtestmulti/auth-report.json.back >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
       - name: Attach result
         uses: actions/upload-artifact@v4

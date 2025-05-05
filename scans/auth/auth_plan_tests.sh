@@ -39,7 +39,8 @@ runplan()
             summary="${summary}  Plan: $TYPE\tERROR\n"
             getreportdetails $AUTHREPORT
             RES=1
-        fi 
+        fi
+        cp $AUTHREPORT $AUTHREPORT.back
         rm $AUTHREPORT
     else
         echo "Using the result of the plan"
