@@ -33,7 +33,8 @@ jobs:
         with:
          path: output/output.yml
       - name: Build Feature Branch and Raise PR
-        if: ${{ ! cancelled() }}
+        # if: ${{ ! cancelled() }}
+        if: ${{ false }}
         run: |
           # Setup git details
           export GITHUB_USER=zapbot
