@@ -15,7 +15,6 @@ env:
         - description: Fill Email
           type: USERNAME
           xpath: "//*[@id=\"email\"]"
-          value: multi@authenticationtest.com
           timeout: 1000
         - description: Email Next
           type: CLICK
@@ -24,7 +23,6 @@ env:
         - description: Fill password
           type: PASSWORD
           xpath: "//*[@id=\"password\"]"
-          value: pa$$w0rd
           timeout: 1000
         - description: Log In
           type: RETURN
@@ -79,8 +77,3 @@ jobs:
   - summary
   - afenv
   - statistics
-  - diagnostics
-  - diagnosticsmessages
-  - diagnosticslocalstorage
-  - diagnosticssessionstorage
-  - diagnosticswebelements

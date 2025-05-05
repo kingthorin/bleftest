@@ -19,10 +19,8 @@ runplan()
         AUTHREPORT=auth-report.json
     fi
     if [ -f $AUTHREPORT ]
-    cat $AUTHREPORT
     then
         echo "Using data from the authentication report"
-        cat $AUTHREPORT
         AUTH=`jq -r '.summaryItems[] | select(.key == "auth.summary.auth") | .passed' $AUTHREPORT`
         
         if [ "$AUTH" == "true" ]
